@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaik Chand Basha — Senior Frontend Engineer</title>
+<meta name="description" content="Portfolio of Shaik Chand Basha, Senior Frontend Engineer specializing in React, TypeScript and real-time web applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0908;
+    --panel:#141210;
+    --panel-hi:#1c1815;
+    --line:#2b2620;
+    --orange:#ff6a1a;
+    --orange-hi:#ff9143;
+    --amber:#ffb020;
+    --text:#f5f1ea;
+    --muted:#a6a096;
+    --faint:#6b665d;
+    --disp:'Archivo Black',sans-serif;
+    --body:'Inter',sans-serif;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;overflow-x:hidden;
+  }
+  ::selection{background:var(--orange);color:#0a0908;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;opacity:0.18;
+  }
+
+  /* ---------- nav ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,9,8,0.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  .nav{max-width:1120px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:var(--disp);font-size:17px;letter-spacing:-0.01em;display:flex;align-items:center;gap:9px;}
+  .brand .spark{width:9px;height:9px;background:var(--orange);border-radius:2px;box-shadow:0 0 12px var(--orange);animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  .navlinks{display:flex;gap:34px;font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:0.08em;}
+  .navlinks a{color:var(--muted);transition:color .2s;}
+  .navlinks a:hover{color:var(--orange);}
+  .nav-cta{
+    font-family:var(--mono);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;
+    padding:10px 20px;border:1px solid var(--orange);color:var(--orange);transition:all .2s;
+  }
+  .nav-cta:hover{background:var(--orange);color:#0a0908;box-shadow:0 0 22px rgba(255,106,26,0.5);}
+  .navtoggle{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:110px;z-index:1;}
+  .glow{position:absolute;border-radius:50%;filter:blur(110px);opacity:0.35;z-index:0;pointer-events:none;}
+  .glow1{width:520px;height:520px;background:var(--orange);top:-160px;right:-160px;}
+  .glow2{width:380px;height:380px;background:var(--amber);bottom:-140px;left:-120px;opacity:0.2;}
+
+  .badge{
+    position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:12.5px;color:var(--orange);text-transform:uppercase;letter-spacing:0.12em;
+    border:1px solid var(--line);padding:8px 16px;margin-bottom:28px;
+  }
+  .badge .dot{width:7px;height:7px;background:#3ddc73;border-radius:50%;box-shadow:0 0 8px #3ddc73;}
+
+  h1{
+    position:relative;z-index:1;font-family:var(--disp);font-size:clamp(40px,7.2vw,88px);line-height:0.98;letter-spacing:-0.01em;
+    text-transform:uppercase;max-width:920px;
+  }
+  h1 .hl{
+    color:var(--orange);position:relative;
+    text-shadow:0 0 40px rgba(255,106,26,0.5);
+  }
+  .hero p.lede{position:relative;z-index:1;max-width:600px;margin-top:28px;font-size:17px;color:var(--muted);}
+  .hero p.lede strong{color:var(--text);font-weight:700;}
+
+  .hero-cta{position:relative;z-index:1;margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-solid{
+    font-family:var(--mono);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;
+    padding:16px 30px;background:var(--orange);color:#0a0908;transition:transform .2s, box-shadow .2s;
+    box-shadow:0 0 0 rgba(255,106,26,0);
+  }
+  .btn-solid:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,106,26,0.4);}
+  .btn-outline{
+    font-family:var(--mono);font-size:13.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;
+    padding:16px 30px;border:1px solid var(--line);color:var(--text);transition:border-color .2s, transform .2s;
+  }
+  .btn-outline:hover{border-color:var(--orange);transform:translateY(-3px);}
+
+  .stat-row{position:relative;z-index:1;margin-top:64px;display:flex;gap:52px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:var(--disp);font-size:38px;color:var(--orange);text-shadow:0 0 26px rgba(255,106,26,0.4);}
+  .stat span{font-family:var(--mono);font-size:11.5px;color:var(--faint);text-transform:uppercase;letter-spacing:0.06em;}
+
+  /* ---------- ticker ---------- */
+  .ticker-band{
+    position:relative;z-index:1;margin-top:76px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:18px 0;overflow:hidden;background:var(--panel);
+  }
+  .ticker-track{display:flex;width:max-content;animation:scroll 26s linear infinite;}
+  .ticker-track span{
+    font-family:var(--mono);font-size:13.5px;color:var(--muted);white-space:nowrap;padding:0 28px;
+    display:flex;align-items:center;gap:28px;
+  }
+  .ticker-track span::after{content:'◆';color:var(--orange);font-size:9px;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- sections ---------- */
+  section{padding:120px 0;position:relative;z-index:1;}
+  .divider{display:flex;align-items:baseline;gap:18px;margin-bottom:58px;}
+  .divider .num{font-family:var(--mono);color:var(--orange);font-size:13px;}
+  .divider .title{font-family:var(--disp);font-size:clamp(26px,3.6vw,42px);text-transform:uppercase;letter-spacing:-0.01em;}
+  .divider .rule{flex:1;height:1px;background:var(--line);}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;}
+  .about-grid p{color:var(--muted);font-size:16px;margin-bottom:18px;max-width:520px;}
+  .about-grid p strong{color:var(--text);font-weight:700;}
+
+  .skill-card{border:1px solid var(--line);background:var(--panel);padding:20px 22px;margin-bottom:14px;}
+  .skill-card .row{display:flex;justify-content:space-between;margin-bottom:8px;}
+  .skill-card .row b{font-size:14px;font-weight:700;}
+  .skill-card .row span{font-family:var(--mono);font-size:11.5px;color:var(--faint);}
+  .bar{height:6px;background:#221d18;overflow:hidden;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--amber));width:0;transition:width 1.1s ease;box-shadow:0 0 10px rgba(255,106,26,0.5);}
+
+  /* experience */
+  .timeline{position:relative;padding-left:36px;}
+  .timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--orange),transparent);}
+  .t-item{position:relative;margin-bottom:48px;}
+  .t-item:last-child{margin-bottom:0;}
+  .t-dot{position:absolute;left:-36px;top:4px;width:14px;height:14px;background:var(--orange);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--line), 0 0 14px rgba(255,106,26,0.6);}
+  .t-card{border:1px solid var(--line);background:var(--panel);padding:30px 32px;transition:border-color .2s, transform .2s;}
+  .t-card:hover{border-color:var(--orange);transform:translateX(4px);}
+  .t-date{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:8px;}
+  .t-role{font-family:var(--disp);font-size:21px;text-transform:uppercase;margin-bottom:4px;}
+  .t-company{font-family:var(--mono);font-size:13px;color:var(--orange);margin-bottom:16px;}
+  .t-card ul{list-style:none;}
+  .t-card li{position:relative;padding-left:20px;margin-bottom:9px;font-size:14.5px;color:var(--muted);max-width:640px;}
+  .t-card li::before{content:'▸';position:absolute;left:0;color:var(--orange);}
+  .t-env{margin-top:16px;font-family:var(--mono);font-size:11.5px;color:var(--faint);}
+
+  /* projects */
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .proj-card{background:var(--panel);padding:30px;border-top:2px solid transparent;transition:border-color .2s, background .2s;}
+  .proj-card:hover{border-top-color:var(--orange);background:var(--panel-hi);}
+  .proj-client{font-family:var(--mono);font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;}
+  .proj-role{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:2px;margin-bottom:16px;}
+  .proj-name{font-family:var(--disp);font-size:19px;text-transform:uppercase;margin-bottom:12px;}
+  .proj-card p{font-size:14px;color:var(--muted);margin-bottom:18px;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .proj-tags span{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--line);padding:4px 9px;}
+
+  /* education */
+  .edu-row{margin-top:56px;display:flex;align-items:center;gap:22px;border:1px solid var(--line);background:var(--panel);padding:26px 30px;flex-wrap:wrap;}
+  .edu-icon{width:54px;height:54px;background:var(--orange);color:#0a0908;font-family:var(--disp);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .edu-degree{font-weight:700;font-size:15.5px;}
+  .edu-school{color:var(--muted);font-size:13.5px;margin-top:3px;}
+  .edu-year{margin-left:auto;font-family:var(--mono);color:var(--faint);font-size:12.5px;}
+
+  /* contact */
+  .cta-band{
+    border:1px solid var(--orange);background:linear-gradient(160deg,#171310,#0a0908);
+    padding:70px 56px;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:center;
+  }
+  .cta-band::before{content:'';position:absolute;width:360px;height:360px;background:var(--orange);border-radius:50%;filter:blur(140px);opacity:0.25;top:-160px;right:-100px;}
+  .cta-band h2{position:relative;z-index:1;font-family:var(--disp);font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;line-height:1.15;margin-bottom:16px;}
+  .cta-band h2 span{color:var(--orange);}
+  .cta-band p{position:relative;z-index:1;color:var(--muted);max-width:420px;}
+  .cta-links{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;}
+  .cta-link{
+    display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);padding:17px 20px;
+    font-family:var(--mono);font-size:13.5px;transition:border-color .2s, background .2s;
+  }
+  .cta-link:hover{border-color:var(--orange);background:rgba(255,106,26,0.06);}
+  .cta-link .k{color:var(--faint);text-transform:uppercase;font-size:10.5px;letter-spacing:0.06em;display:block;margin-bottom:3px;}
+
+  footer{padding:44px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--faint);border-top:1px solid var(--line);}
+
+  @media (max-width:860px){
+    .navlinks,.nav-cta{display:none;}
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .proj-grid{grid-template-columns:1fr 1fr;}
+    .cta-band{grid-template-columns:1fr;padding:44px 28px;}
+    .timeline{padding-left:28px;}
+    .t-dot{left:-28px;}
+  }
+  @media (max-width:560px){
+    .proj-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    .edu-year{margin-left:0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  }
+  :focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand"><span class="spark"></span>CHAND&nbsp;BASHA</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Hire Me</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+
+    <div class="badge"><span class="dot"></span>Open to new opportunities</div>
+    <h1>Frontend engineer<br>built for <span class="hl">real&#8209;time.</span></h1>
+    <p class="lede">Senior Frontend Engineer with <strong>6 years</strong> shipping production React &amp; TypeScript apps for <strong>American Express, PragatiFin</strong> and the <strong>University of Kansas</strong> — where the data doesn't wait, and neither does the UI.</p>
+
+    <div class="hero-cta">
+      <a class="btn-solid" href="#projects">View Projects</a>
+      <a class="btn-outline" href="mailto:shaikchandbasha333@gmail.com">Get In Touch</a>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><b>6+</b><span>Years Experience</span></div>
+      <div class="stat"><b>6</b><span>Production Apps Shipped</span></div>
+      <div class="stat"><b>3</b><span>Industries Served</span></div>
+    </div>
+  </section>
+
+  <div class="ticker-band">
+    <div class="ticker-track" id="tickerTrack">
+      <span>React.js</span><span>TypeScript</span><span>Redux &amp; Redux-Saga</span><span>WebSockets</span><span>Ionic React</span><span>Next.js</span><span>REST APIs</span><span>Node.js</span><span>PostgreSQL</span><span>Jest</span>
+      <span>React.js</span><span>TypeScript</span><span>Redux &amp; Redux-Saga</span><span>WebSockets</span><span>Ionic React</span><span>Next.js</span><span>REST APIs</span><span>Node.js</span><span>PostgreSQL</span><span>Jest</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="about">
+      <div class="divider"><span class="num">01</span><span class="title">About &amp; Stack</span><span class="rule"></span></div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>I'm <strong>Shaik Chand Basha</strong>, a Senior Frontend Engineer based in Hyderabad, focused on building and maintaining <strong>React-based web and mobile applications</strong> with TypeScript, Redux, and modern frontend architecture.</p>
+          <p>My work centers on <strong>performance optimization, real-time data handling</strong>, and scalable component design — from rebuilding a legacy iframe widget into a standalone responsive React app for Amex, to architecting a cross-platform fintech product from the ground up.</p>
+          <p>I collaborate closely with backend teams to ship reliable, user-focused interfaces, and I actively mentor junior engineers and drive code review culture wherever I work.</p>
+        </div>
+        <div class="reveal">
+          <div class="skill-card">
+            <div class="row"><b>React &amp; TypeScript</b><span>Expert</span></div>
+            <div class="bar"><i data-w="95"></i></div>
+          </div>
+          <div class="skill-card">
+            <div class="row"><b>Real-time Systems</b><span>Advanced</span></div>
+            <div class="bar"><i data-w="90"></i></div>
+          </div>
+          <div class="skill-card">
+            <div class="row"><b>UI Architecture</b><span>Advanced</span></div>
+            <div class="bar"><i data-w="88"></i></div>
+          </div>
+          <div class="skill-card">
+            <div class="row"><b>Backend Integration</b><span>Proficient</span></div>
+            <div class="bar"><i data-w="80"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="divider"><span class="num">02</span><span class="title">Experience</span><span class="rule"></span></div>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <div class="t-dot"></div>
+          <div class="t-card">
+            <div class="t-date">Aug 2025 — Feb 2026</div>
+            <div class="t-role">Consultant Software Engineer</div>
+            <div class="t-company">Thought Blends</div>
+            <ul>
+              <li>Designing and developing frontend features for enterprise web applications using React.js and TypeScript.</li>
+              <li>Improving frontend performance and maintainability through component refactoring and architectural best practices.</li>
+              <li>Collaborating with product managers, designers, and backend engineers to deliver user-facing features.</li>
+              <li>Driving code reviews and participating in frontend architecture discussions.</li>
+            </ul>
+            <div class="t-env">Environment: React.js, TypeScript, Redux, REST APIs, Webpack</div>
+          </div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-dot"></div>
+          <div class="t-card">
+            <div class="t-date">Mar 2020 — Jul 2025</div>
+            <div class="t-role">Consultant Engineer</div>
+            <div class="t-company">Scriptbees</div>
+            <ul>
+              <li>Delivered multiple React-based web and mobile applications across fintech, education, and logistics domains.</li>
+              <li>Designed and implemented frontend architecture using React.js and Ionic React for cross-platform applications.</li>
+              <li>Built real-time frontend features using WebSockets and Redux-based state management.</li>
+              <li>Mentored junior frontend developers and conducted regular code reviews.</li>
+              <li>Integrated frontend applications with backend APIs and PostgreSQL-backed services.</li>
+            </ul>
+            <div class="t-env">Environment: React.js, TypeScript, Redux, Ionic React, WebSockets, Node.js, PostgreSQL</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="divider"><span class="num">03</span><span class="title">Selected Projects</span><span class="rule"></span></div>
+      <div class="proj-grid">
+        <div class="proj-card reveal">
+          <div class="proj-client">American Express</div>
+          <div class="proj-role">Frontend Developer</div>
+          <div class="proj-name">Flex-Rewards</div>
+          <p>Rebuilt an iframe-based rewards widget into a standalone responsive React app used across partner platforms — web, Android, and iOS.</p>
+          <div class="proj-tags"><span>React</span><span>Cross-platform</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-client">PragatiFin</div>
+          <div class="proj-role">Lead Frontend Developer</div>
+          <div class="proj-name">Aryabhatta 3</div>
+          <p>Architected a cross-platform fintech app in Ionic React with JWT auth, role-based access, and real-time financial dashboards.</p>
+          <div class="proj-tags"><span>Ionic React</span><span>TypeScript</span><span>JWT</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-client">University of Kansas</div>
+          <div class="proj-role">Frontend / Full Stack</div>
+          <div class="proj-name">Content Portal</div>
+          <p>Built a reusable, Storybook-documented component library powering WCAG-compliant layouts backed by PostgreSQL data.</p>
+          <div class="proj-tags"><span>React</span><span>Storybook</span><span>WCAG</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-client">Scriptbees</div>
+          <div class="proj-role">Frontend / Full Stack</div>
+          <div class="proj-name">Simply Track — Mobile</div>
+          <p>Cross-platform tracking app with live WebSocket updates, interactive route maps, and native GPS/camera integration.</p>
+          <div class="proj-tags"><span>Ionic React</span><span>WebSockets</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-client">Scriptbees</div>
+          <div class="proj-role">Lead Frontend Developer</div>
+          <div class="proj-name">Simply Track — Web</div>
+          <p>Led a real-time tracking dashboard, optimizing WebSocket handling for high-frequency location updates at scale.</p>
+          <div class="proj-tags"><span>Redux-Saga</span><span>WebSockets</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-client">University of Kansas</div>
+          <div class="proj-role">Frontend / Full Stack</div>
+          <div class="proj-name">Parent Portal</div>
+          <p>Responsive parent-facing portal with reusable components, lazy loading, memoization, and full Jest test coverage.</p>
+          <div class="proj-tags"><span>React</span><span>Jest</span></div>
+        </div>
+      </div>
+
+      <div class="edu-row reveal">
+        <div class="edu-icon">BT</div>
+        <div>
+          <div class="edu-degree">B.Tech in Computer Science</div>
+          <div class="edu-school">Rajiv Gandhi University of Knowledge Technologies (RGUKT), Nuzvid</div>
+        </div>
+        <div class="edu-year">2020</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="cta-band reveal">
+        <div>
+          <h2>Let's build something that ships <span>fast.</span></h2>
+          <p>Open to senior frontend and full-stack roles — reach out directly or connect on LinkedIn.</p>
+        </div>
+        <div class="cta-links">
+          <a class="cta-link" href="mailto:shaikchandbasha333@gmail.com"><span><span class="k">Email</span>shaikchandbasha333@gmail.com</span> →</a>
+          <a class="cta-link" href="tel:+918008225457"><span><span class="k">Phone</span>+91 80082 25457</span> →</a>
+          <a class="cta-link" href="https://linkedin.com/in/chand-basha-shaik" target="_blank" rel="noopener"><span><span class="k">LinkedIn</span>chand-basha-shaik</span> →</a>
+          <a class="cta-link" href="#"><span><span class="k">Location</span>Hyderabad, India</span> →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> SHAIK CHAND BASHA — BUILT FOR GITHUB PAGES</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  const bars = document.querySelectorAll('.bar i');
+  const barIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.style.width = e.target.dataset.w + '%'; barIo.unobserve(e.target); }
+    });
+  }, {threshold:0.4});
+  bars.forEach(b=>barIo.observe(b));
+</script>
+
+</body>
+</html>
